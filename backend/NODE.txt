@@ -1,0 +1,66 @@
+mkdir NOME_PASTA
+
+env = DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+
+entrar na pasta
+
+npm init
+
+npm i express
+
+npm i -g nodemon
+
+npm i cors
+
+arquivo docker-compose.yml
+	{
+
+		version: '3.9'
+
+		services:
+			database:
+		    		image: postgres
+	    			container_name: tutorial
+				restart: always
+	    			ports:
+				      - 5432:5432
+				environment:
+				      - POSTGRES_USER=postgres
+				      - POSTGRES_PASSWORD=postgres
+				      - POSTGRES_DB=database
+				volumes:
+				      - pgdata:/data/postgres
+		 volumes:
+		 	pgdata:
+	    			driver: local
+
+
+	}
+package.json
+	scripts: {
+		"dev:" "nodemon src/server.js"
+	}
+
+arquivo server.js
+	const express = require("express")
+	
+	const app = express()
+
+	app.use(express.json())
+
+	app.get("health", (req, res) => {
+		return res.json("up")
+	})
+
+	app.listen(3333, () => console.log("Server up in 3333"))
+
+Rodar o docker 
+	docker-compose up -d
+
+npm i prisma
+
+npx prisma init
+
+npx prisma migrate dev (nome da tabela)
+
+npx prisma studio
